@@ -1,5 +1,7 @@
 #include<iostream>
 #include"Queuecpp.h"
+#include"Stackcpp.h"
+
 
 using namespace std;
 
@@ -42,6 +44,21 @@ class Tree{
         {
             return this->root;
         }
+        void preorderIterative()
+        {
+            preorderIterative(this->root);
+        }
+        void preorderIterative(Node* x);
+        void InorderIterative()
+        {
+            InorderIterative(this->root);
+        }
+        void InorderIterative(Node* x);
+        void postorderIterative()
+        {
+            postorderIterative(this->root);
+        }
+        void postorderIterative(Node* x);
 };
 
 void Tree::createTree()
@@ -151,6 +168,77 @@ int Tree::height(Node * p)
     r = height(p->rightChild);
     return max(l,r)+1;
 }
+
+void Tree::preorderIterative(Node * x)
+{
+    Stack s(100);
+
+    Node * t = x;
+
+    while(t != nullptr || !s.isEmpty())
+    {
+        if(t != nullptr)
+        {
+            cout << t->data << " " ;
+            s.add(t);
+            t = t->leftChild;
+        }
+        else
+        {
+            t = s.getTop();
+            s.remove();
+            t = t->rightChild;
+        }
+    }
+}
+
+void Tree::InorderIterative(Node * t)
+{   
+    Stack s(100);
+    while(t != nullptr || !s.isEmpty())
+    {
+        if(t != nullptr)
+        {
+            s.add(t);
+            t = t->leftChild;
+        }
+        else
+        {
+            t = s.getTop();
+            s.remove();
+            cout << t->data << " ";
+            t = t->rightChild;
+        }
+    }
+}
+
+// void Tree::postorderIterative(Node * t)
+// {
+//     stack<long int> s;
+//     while (t != nullptr || !s.empty())
+//     {
+//         if(t != nullptr)
+//         {
+//             s.emplace((long int)t);
+//             t = t->leftChild;
+//         }
+//         else
+//         {
+//             long temp = s.top();
+//             s.pop();
+//             if(temp > 0)
+//             {
+//                 s.emplace(-temp);
+//                 t = ((Node*)temp)->rightChild;
+//             }
+//             else
+//             {
+//                 cout << ((Node*) (-1*temp))->data << " ";
+//                 t = nullptr;
+//             }
+//         }
+//     }
+// }
 
 int main()
 {
