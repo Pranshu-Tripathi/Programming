@@ -1,6 +1,8 @@
 #include<iostream>
 #include<queue>
 #include<stack>
+#include<map>
+#include<vector>
 using namespace std;
 
 
@@ -8,6 +10,13 @@ struct Node {
     int val;
     struct Node* right;
     struct Node* left;
+};
+
+struct NodeWithHeight{
+    int val;
+    int height;
+    struct NodeWithHeight* left;
+    struct NodeWithHeight* right;
 };
 
 
@@ -310,4 +319,147 @@ Node* deletingBinaryTree(Node* node)
     cout << "deleting node :  " << node->val << endl;
     node = nullptr;
     return node;
+}
+
+bool checkIdenticalTree(Node* node1, Node* node2)
+{
+    if(node1 == nullptr && node2 == nullptr)
+        return true;
+    if(node1 == nullptr || node2 == nullptr)
+        return false;
+    
+    return node1->val == node2->val && checkIdenticalTree(node1->left,node2->left) && checkIdenticalTree(node1->right,node2->right);
+}
+
+int getLevelOfNode(Node* node, int key, int level)
+{
+    if(node == nullptr)
+        return 0;
+    
+    if(node->val == key)
+        return level;
+
+    int l = 0;
+    
+    l = getLevelOfNode(node->left,key,level+1);
+    if(l != 0)
+        return l;
+    
+    l = getLevelOfNode(node->right,key,level+1);
+    return l;
+}
+
+void printTopViewOfBT(NodeWithHeight* node)
+{
+    if(node == nullptr)
+        return;
+
+    queue<NodeWithHeight*> q;
+    map<int,NodeWithHeight*> m;
+    
+    node->height = 0;
+    q.push(node);
+
+    while(!q.empty())
+    {
+        NodeWithHeight* front = q.front();
+        q.pop();
+
+        int height = front->height;
+        if(m.find(height) == m.end())
+            m[height] = front;
+        
+        if(front->left != nullptr)
+        {
+            front->left->height = height - 1;
+            q.push(front->left);
+        }
+
+        if(front->right != nullptr)
+        {
+            front->right->height = height + 1;
+            q.push(front->right);
+        }
+    }
+
+    for(auto e : m)
+    {
+        cout << e.second->val << " ";
+    }
+}
+
+void printBottomViewOfBT(NodeWithHeight* node)
+{
+    if(node == nullptr)
+        return;
+    
+    queue<NodeWithHeight*> q;
+    map<int,NodeWithHeight*> m;
+
+    node->height = 0;
+    q.push(node);
+
+    while(!q.empty())
+    {
+        NodeWithHeight* front = q.front();
+        
+        int height = front->height;
+        m[height] = front;
+
+        if(front->left != nullptr)
+        {
+            front->left->height = height-1;
+            q.push(front->left);
+        }
+            
+        if(front->right != nullptr)
+        {
+            front->right->height = height + 1;
+            q.push(front->right);
+        }
+    }
+
+    for(auto e : m)
+    {
+        cout << e.second->val << " ";
+    }
+}
+
+void verticalOrderOfBT(NodeWithHeight* node)
+{
+    if(node == nullptr)
+        return;
+    
+    queue<NodeWithHeight*> q;
+    map<int,vector<NodeWithHeight*>>m;
+
+    node->height = 0;
+    q.push(node);
+
+    while(!q.empty())
+    {
+        NodeWithHeight* front = q.front();
+        int height = front->height;
+        m[height].push_back(front);
+        if(front->left != nullptr)
+        {
+            front->left->height = height - 1;
+            q.push(front->left);
+        }
+        if(front->right != nullptr)
+        {
+            front->right->height = height + 1;
+            q.push(front->right);
+        }
+    }
+
+    for(auto e : m)
+    {
+        cout << "Height " <<e.first << ": ";
+        for(auto x : e.second)
+        {
+            cout << x->val << " ";
+        }
+        cout << endl;
+    }
 }
