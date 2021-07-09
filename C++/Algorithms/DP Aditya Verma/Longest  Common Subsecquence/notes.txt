@@ -1,0 +1,12 @@
+there are 15 variations that should be known how to solve in this section
+
+    1. Longest Common Subsecquence
+    2. Longest Common SubString
+    3. Print LCS
+    4. Shortest Common SuperSecquence
+    5. Min Insert/Delete to convert A to B
+    6. Longest Palindromic Subsecquence
+    7. Min Insert/Delete to make string a Palindromic
+    8. Print SCS
+    9. Longest repeating Subsecquence
+    10. Subsecquence Pattern Matching (can be solved by two pointers that is a better approach)

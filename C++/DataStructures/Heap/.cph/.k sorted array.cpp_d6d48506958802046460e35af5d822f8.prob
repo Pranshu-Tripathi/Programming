@@ -1,0 +1,1 @@
+{"name":"Local: k sorted array","url":"c:\\Users\\mtpra\\vsCodeProjects\\C++\\Data Structures\\Heap\\k sorted array.cpp","tests":[{"id":1623672687476,"input":"7 3\n6 5 3 2 8 10 9","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\mtpra\\vsCodeProjects\\C++\\Data Structures\\Heap\\k sorted array.cpp","group":"local","local":true}

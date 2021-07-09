@@ -1,0 +1,4 @@
+We calculate temp answer for a range and then choose the best of them
+
+
+1. reduce cost of matrix multiplication
